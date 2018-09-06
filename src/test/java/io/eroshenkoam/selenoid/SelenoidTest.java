@@ -1,5 +1,6 @@
 package io.eroshenkoam.selenoid;
 
+import com.googlecode.junittoolbox.ParallelParameterized;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.Rule;
 import org.junit.Test;
@@ -12,7 +13,7 @@ import java.util.Collection;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.startsWith;
 
-@RunWith(Parameterized.class)
+@RunWith(ParallelParameterized.class)
 public class SelenoidTest {
 
     private static final ProjectConfig config = ConfigFactory.create(ProjectConfig.class, System.getProperties());
