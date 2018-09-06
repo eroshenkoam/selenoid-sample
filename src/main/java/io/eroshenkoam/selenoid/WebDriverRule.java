@@ -2,7 +2,6 @@ package io.eroshenkoam.selenoid;
 
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;
-import org.aeonbits.owner.ConfigFactory;
 import org.apache.commons.io.IOUtils;
 import org.junit.rules.ExternalResource;
 import org.openqa.selenium.WebDriver;
