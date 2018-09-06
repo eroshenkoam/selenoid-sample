@@ -13,4 +13,8 @@ public interface ProjectConfig extends Config {
     @Key("webdriver.base.url")
     String baseUrl();
 
+    @DefaultValue("5")
+    @Key("test.count")
+    int testCount();
+
 }

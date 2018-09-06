@@ -16,14 +16,14 @@ import static org.hamcrest.Matchers.startsWith;
 @RunWith(ParallelParameterized.class)
 public class SelenoidTest {
 
-    private final ProjectConfig config = ConfigFactory.create(ProjectConfig.class, System.getProperties());
+    private static final ProjectConfig config = ConfigFactory.create(ProjectConfig.class, System.getProperties());
 
     @Rule
     public WebDriverRule webDriverRule = new WebDriverRule(config);
 
     @Parameterized.Parameters
     public static Collection<Object[]> parameters() {
-        return Arrays.asList(new Object[10][0]);
+        return Arrays.asList(new Object[config.testCount()][0]);
     }
 
     @Test
