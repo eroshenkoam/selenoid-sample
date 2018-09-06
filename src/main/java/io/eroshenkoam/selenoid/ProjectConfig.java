@@ -4,9 +4,13 @@ import org.aeonbits.owner.Config;
 
 import java.net.URL;
 
-public interface WebDriverConfig extends Config {
+public interface ProjectConfig extends Config {
 
     @Key("webdriver.remote.url")
     URL remoteUrl();
+
+    @DefaultValue("https://auto.ru")
+    @Key("webdriver.base.url")
+    String baseUrl();
 
 }

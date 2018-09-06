@@ -3,7 +3,6 @@ package io.eroshenkoam.selenoid;
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;
 import org.aeonbits.owner.ConfigFactory;
-import org.aeonbits.owner.Factory;
 import org.apache.commons.io.IOUtils;
 import org.junit.rules.ExternalResource;
 import org.openqa.selenium.WebDriver;
@@ -28,15 +27,15 @@ public class WebDriverRule extends ExternalResource {
 
     private final AllureLifecycle lifecycle = Allure.getLifecycle();
 
-    private final WebDriverConfig config;
+    private final ProjectConfig config;
     private WebDriver driver;
 
     public WebDriver getDriver() {
         return driver;
     }
 
-    public WebDriverRule() {
-        this.config = ConfigFactory.create(WebDriverConfig.class, System.getProperties());
+    public WebDriverRule(ProjectConfig config) {
+        this.config = config;
     }
 
     protected void before() {

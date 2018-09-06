@@ -1,6 +1,7 @@
 package io.eroshenkoam.selenoid;
 
 import com.googlecode.junittoolbox.ParallelParameterized;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,17 +16,19 @@ import static org.hamcrest.Matchers.startsWith;
 @RunWith(ParallelParameterized.class)
 public class SelenoidTest {
 
+    private final ProjectConfig config = ConfigFactory.create(ProjectConfig.class, System.getProperties());
+
     @Rule
-    public WebDriverRule webDriverRule = new WebDriverRule();
+    public WebDriverRule webDriverRule = new WebDriverRule(config);
 
     @Parameterized.Parameters
     public static Collection<Object[]> parameters() {
-        return Arrays.asList(new Object[100][0]);
+        return Arrays.asList(new Object[10][0]);
     }
 
     @Test
     public void selenoidSessionTest() {
-        webDriverRule.getDriver().get("https://auto.ru");
+        webDriverRule.getDriver().get(config.baseUrl());
         assertThat(webDriverRule.getDriver().getTitle(), startsWith("Авто.ру"));
     }
 
