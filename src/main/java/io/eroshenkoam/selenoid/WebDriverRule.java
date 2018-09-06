@@ -39,7 +39,7 @@ public class WebDriverRule extends ExternalResource {
 
     protected void before() {
         final DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-        capabilities.setCapability("enableVideo", true);
+        capabilities.setCapability("enableVideo", config.videoEnabled());
 
         this.driver = new RemoteWebDriver(config.remoteUrl(), capabilities);
     }

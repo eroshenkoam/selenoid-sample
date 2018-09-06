@@ -13,6 +13,10 @@ public interface ProjectConfig extends Config {
     @Key("webdriver.base.url")
     String baseUrl();
 
+    @DefaultValue("true")
+    @Key("webdriver.video.enabled")
+    boolean videoEnabled();
+
     @DefaultValue("5")
     @Key("test.count")
     int testCount();
