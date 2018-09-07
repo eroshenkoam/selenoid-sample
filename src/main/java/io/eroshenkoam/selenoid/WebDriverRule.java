@@ -3,7 +3,9 @@ package io.eroshenkoam.selenoid;
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;
 import org.apache.commons.io.IOUtils;
-import org.junit.rules.ExternalResource;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.HttpCommandExecutor;
@@ -20,7 +22,7 @@ import static com.jayway.awaitility.Awaitility.await;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasProperty;
 
-public class WebDriverRule extends ExternalResource {
+public class WebDriverRule extends TestWatcher {
 
     private static final Logger LOGGER = Logger.getLogger(WebDriverRule.class.getName());
 
@@ -37,18 +39,24 @@ public class WebDriverRule extends ExternalResource {
         this.config = config;
     }
 
-    protected void before() {
-        final DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+    protected void starting(Description description) {
+        final DesiredCapabilities capabilities = new DesiredCapabilities("chrome", "", Platform.ANY);
         capabilities.setCapability("enableVideo", config.videoEnabled());
+        capabilities.setCapability("name", description.getDisplayName());
+        capabilities.setCapability("enableVNC", true);
 
         this.driver = new RemoteWebDriver(config.remoteUrl(), capabilities);
     }
 
-    protected void after() {
-        getSelenoidVideoUrl().ifPresent(videoUrl -> {
+    protected void finished(Description description) {
+        if (config.videoEnabled()) {
+            getSelenoidVideoUrl().ifPresent(videoUrl -> {
+                this.driver.quit();
+                attachVideo(videoUrl);
+            });
+        } else {
             this.driver.quit();
-            attachVideo(videoUrl);
-        });
+        }
     }
 
     private void attachVideo(String videoUrl) {
