@@ -6,6 +6,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.openqa.selenium.WebDriver;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -27,9 +28,12 @@ public class SelenoidTest {
     }
 
     @Test
-    public void selenoidSessionTest() {
-        webDriverRule.getDriver().get(config.baseUrl());
-        assertThat(webDriverRule.getDriver().getTitle(), startsWith("Авто.ру"));
+    public void selenoidSessionTest() throws Exception {
+        final WebDriver driver = webDriverRule.getDriver();
+        driver.get(config.baseUrl());
+        Thread.sleep(1000);
+
+        assertThat(driver.getTitle(), startsWith("Авто.ру"));
     }
 
 }
