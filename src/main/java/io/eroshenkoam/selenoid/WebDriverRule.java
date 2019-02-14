@@ -44,6 +44,8 @@ public class WebDriverRule extends TestWatcher {
         capabilities.setCapability("enableVideo", config.videoEnabled());
         capabilities.setCapability("name", description.getDisplayName());
         capabilities.setCapability("enableVNC", true);
+        capabilities.setBrowserName(config.browserName());
+        capabilities.setVersion(config.browserVersion());
 
         this.driver = new RemoteWebDriver(config.remoteUrl(), capabilities);
     }

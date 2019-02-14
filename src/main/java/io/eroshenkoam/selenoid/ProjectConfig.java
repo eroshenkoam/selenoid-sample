@@ -9,6 +9,12 @@ public interface ProjectConfig extends Config {
     @Key("webdriver.remote.url")
     URL remoteUrl();
 
+    @Key("webdriver.browser.name")
+    String browserName();
+
+    @Key("webdriver.browser.version")
+    String browserVersion();
+
     @DefaultValue("https://auto.ru")
     @Key("webdriver.base.url")
     String baseUrl();
