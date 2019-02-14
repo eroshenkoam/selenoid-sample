@@ -31,7 +31,6 @@ public class SelenoidTest {
     public void selenoidSessionTest() throws Exception {
         final WebDriver driver = webDriverRule.getDriver();
         driver.get(config.baseUrl());
-        Thread.sleep(1000);
 
         assertThat(driver.getTitle(), startsWith("Авто.ру"));
     }
