@@ -17,7 +17,8 @@ import static org.hamcrest.Matchers.startsWith;
 @RunWith(ParallelParameterized.class)
 public class SelenoidTest {
 
-    private static final ProjectConfig config = ConfigFactory.create(ProjectConfig.class, System.getenv());
+    private static final ProjectConfig config = ConfigFactory
+            .create(ProjectConfig.class, System.getProperties(), System.getenv());
 
     @Rule
     public WebDriverRule webDriverRule = new WebDriverRule(config);
